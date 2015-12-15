@@ -29,23 +29,22 @@
 /*
  * Returns the selected player's percent.
  * @param int playerNumber Specifies which player's percent to get.
- * @return uint32_t The percent of the selected player, or 0 if the input was invalid.
+ * @return uint16_t The percent of the selected player, or 0 if the input was invalid.
  */
-uint32_t getPlayerPercent( int playerNumber ) {
-		// TODO: Can probably switch this to uint16_t and remove the bitshifts
-		uint32_t* p1Percent = SSBM_VAL_PERCENTDISPLAY1;
-		uint32_t* p2Percent = SSBM_VAL_PERCENTDISPLAY2;
-		uint32_t* p3Percent = SSBM_VAL_PERCENTDISPLAY3;
-		uint32_t* p4Percent = SSBM_VAL_PERCENTDISPLAY4;
+uint16_t getPlayerPercent( int playerNumber ) {
+		uint16_t* p1Percent = SSBM_VAL_PERCENTDISPLAY1;
+		uint16_t* p2Percent = SSBM_VAL_PERCENTDISPLAY2;
+		uint16_t* p3Percent = SSBM_VAL_PERCENTDISPLAY3;
+		uint16_t* p4Percent = SSBM_VAL_PERCENTDISPLAY4;
 	switch( playerNumber ) {
 		case 1:
-			return *p1Percent >> 16;
+			return *p1Percent;
 		case 2:
-			return *p2Percent >> 16;
+			return *p2Percent;
 		case 3:
-			return *p3Percent >> 16;
+			return *p3Percent;
 		case 4:
-			return *p4Percent >> 16;
+			return *p4Percent;
 		default:
 			return 0;
 	}
@@ -53,10 +52,10 @@ uint32_t getPlayerPercent( int playerNumber ) {
 
 int _main() {
 	// built in functions setup
-	uint32_t *( *endStockGame )() = SSBM_FUNC_ENDSTOCKGAME;
-	/*void      *( *play_menu_forward )() = SSBM_FUNC_PLAYMENUFORWARD;*/
-	/*uint32_t *( *pointer_to_character )( int ) = SSBM_FUNC_GETCHARPOINTER;*/
-	/*uint32_t *( *player_count )() = SSBM_FUNC_PLAYERCOUNT;*/
+	uint16_t *( *endStockGame )() = SSBM_FUNC_ENDSTOCKGAME;
+	uint32_t *( *getPointerToCharacter )( int ) = SSBM_FUNC_GETCHARPOINTER;
+	/*void *( *PlayMenuForwardSound )() = SSBM_FUNC_PLAYMENUFORWARD;*/
+	/*uint32_t *( *getPlayeCcount )() = SSBM_FUNC_PLAYERCOUNT;*/
 
 	if( getPlayerPercent( 1 ) > 100 ) {
 		endStockGame();

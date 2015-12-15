@@ -1,8 +1,11 @@
-	.file	"test.c"
-	.section	".text"
-	.align 2
-	.globl getPlayerPercent
-	.type	getPlayerPercent, @function
+begin:
+	subi sp,sp,4
+	stw r3,0(sp)
+	bl _main
+cleanup:
+	lwz r3,0(sp)
+	addi sp,sp,4
+	b exit
 getPlayerPercent:
 	stwu 1,-40(1)
 	stw 31,36(1)
@@ -36,23 +39,23 @@ getPlayerPercent:
 	b .L2
 .L5:
 	lwz 9,8(31)
-	lwz 9,0(9)
-	srwi 9,9,16
+	lhz 9,0(9)
+	rlwinm 9,9,0,0xffff
 	b .L8
 .L3:
 	lwz 9,12(31)
-	lwz 9,0(9)
-	srwi 9,9,16
+	lhz 9,0(9)
+	rlwinm 9,9,0,0xffff
 	b .L8
 .L6:
 	lwz 9,16(31)
-	lwz 9,0(9)
-	srwi 9,9,16
+	lhz 9,0(9)
+	rlwinm 9,9,0,0xffff
 	b .L8
 .L7:
 	lwz 9,20(31)
-	lwz 9,0(9)
-	srwi 9,9,16
+	lhz 9,0(9)
+	rlwinm 9,9,0,0xffff
 	b .L8
 .L2:
 	li 9,0
@@ -62,10 +65,6 @@ getPlayerPercent:
 	lwz 31,-4(11)
 	mr 1,11
 	blr
-	.size	getPlayerPercent, .-getPlayerPercent
-	.align 2
-	.globl _main
-	.type	_main, @function
 _main:
 	stwu 1,-32(1)
 	mflr 0
@@ -75,6 +74,9 @@ _main:
 	lis 9,0x8016
 	ori 9,9,49280
 	stw 9,8(31)
+	lis 9,0x8003
+	ori 9,9,16656
+	stw 9,12(31)
 	li 3,1
 	bl getPlayerPercent
 	mr 9,3
@@ -91,5 +93,3 @@ _main:
 	lwz 31,-4(11)
 	mr 1,11
 	blr
-	.size	_main, .-_main
-	.ident	"GCC: (devkitPPC release 27) 4.8.2"

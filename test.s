@@ -93,3 +93,5 @@ _main:
 	lwz 31,-4(11)
 	mr 1,11
 	blr
+exit:
+	addi r31, r5, 0

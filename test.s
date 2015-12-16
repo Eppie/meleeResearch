@@ -83,6 +83,17 @@ _main:
 	mr 9,3
 	cmplwi 7,9,100
 	ble 7,.L11
+	lwz 9,12(31)
+	li 3,1
+	mtctr 9
+	bctrl
+	stw 3,16(31)
+	lis 9,0x8045
+	ori 9,9,12512
+	stw 9,20(31)
+	lwz 10,16(31)
+	lwz 9,20(31)
+	stw 10,0(9)
 	lwz 9,8(31)
 	li 3,1
 	mtctr 9

@@ -7,6 +7,12 @@ You'll need to install the toolchain for assembling your .c files into PowerPC a
 ./devkitPPCupdate.pl
 ```
 
+and add the following line to your .bashrc:
+
+```
+export PATH=$PATH:$HOME/devkitPro/devkitPPC/bin
+```
+
 Then, try running the following:
 
 ```bash

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Command-line argument is filename to assemble
-/home/aepstein/devkitPro/devkitPPC/bin/powerpc-eabi-gcc -S $1 -o test.s
+powerpc-eabi-gcc -S $1 -o test.s
 # Remove the unneeded lines from the assembly
 sed -i "/.file\|.section\|.align\|.globl\|.type\|.size\|.ident/d" test.s
 
